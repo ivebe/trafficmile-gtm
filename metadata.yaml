@@ -15,5 +15,5 @@
 homepage: "https://www.trafficmile.com"
 documentation: "https://www.trafficmile.com"
 versions:
-  - sha: 5f02a788b90ae804f86b04aa24af8937e567874a
+  - sha: 355b4b966f72865bc45c4bd74fc07159fc1fe4c6
     changeNotes: Initial Version
