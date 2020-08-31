@@ -97,8 +97,10 @@ const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const setInWindow = require('setInWindow');
 
+const _url = data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro';
+
 const _tracking = {
-  SRC: data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro',
+  SRC: _url,
   SITE_ID: data.site_id,
   TRACKING: {
     FIRE: data.fire,
@@ -119,8 +121,8 @@ if(data.tid) {
 
 setInWindow('TMTRACK', _tracking, true);
 
-if (queryPermission('inject_script', 'https://stage.mytrack.pro/tmtrack.js')) {
-  injectScript('https://stage.mytrack.pro/tmtrack.js', data.gtmOnSuccess(), data.gtmOnFailure());
+if (queryPermission('inject_script', _url + '/tmtrack.js')) {
+  injectScript(_url + '/tmtrack.js', data.gtmOnSuccess(), data.gtmOnFailure());
 } else {
   log('Script load failed due to permissions mismatch.');
   data.gtmOnFailure();
