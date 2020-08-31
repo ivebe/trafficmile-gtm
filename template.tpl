@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "TrafficMile",
+  "displayName": "TrafficMile Pixel Tracking",
   "categories": ["AFFILIATE_MARKETING", "ANALYTICS", "CONVERSIONS"],
   "brand": {
     "id": "brand_dummy",
@@ -38,7 +38,7 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
-    "name": "site_id",
+    "name": "siteID",
     "displayName": "Site ID",
     "simpleValueType": true
   },
@@ -97,11 +97,11 @@ const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const setInWindow = require('setInWindow');
 
-const _url = data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro';
+const endpoint = data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro';
 
 const _tracking = {
-  SRC: _url,
-  SITE_ID: data.site_id,
+  SRC: endpoint,
+  SITE_ID: data.siteID,
   TRACKING: {
     FIRE: data.fire,
   },
@@ -121,8 +121,8 @@ if(data.tid) {
 
 setInWindow('TMTRACK', _tracking, true);
 
-if (queryPermission('inject_script', _url + '/tmtrack.js')) {
-  injectScript(_url + '/tmtrack.js', data.gtmOnSuccess(), data.gtmOnFailure());
+if (queryPermission('inject_script', endpoint + '/tmtrack.js')) {
+  injectScript(endpoint + '/tmtrack.js', data.gtmOnSuccess(), data.gtmOnFailure());
 } else {
   log('Script load failed due to permissions mismatch.');
   data.gtmOnFailure();
