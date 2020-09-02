@@ -96,8 +96,9 @@ const log = require('logToConsole');
 const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const setInWindow = require('setInWindow');
+const encodeUri = require('encodeUri');
 
-const endpoint = data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro';
+const endpoint = encodeUri(data.cname ? data.cname : 'https://' + data.tenant + '.mytrack.pro');
 
 const _tracking = {
   SRC: endpoint,
